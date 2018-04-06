@@ -164,6 +164,7 @@ def plot_result(n_point):
     plt.xlabel('epoch')
     plt.ylabel('loss')
     plt.legend()
+    plt.show()
     
     # plot Prediction
     pred_1 = np.array(dframe1['prediction']).reshape(-1, 1)
@@ -180,6 +181,7 @@ def plot_result(n_point):
     plt.xlabel('x')
     plt.ylabel('y')
     plt.legend()
+    plt.show()
     
 if __name__ == '__main__':
     tf.reset_default_graph() 
