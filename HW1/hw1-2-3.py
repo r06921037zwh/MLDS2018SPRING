@@ -217,7 +217,7 @@ def plot_loss_minRatio(filename):
     fig1 = plt.figure()
     plt.scatter(min_ratio, loss, color='blue')
     plt.title('Loss - Min_Ratio')
-    plt.xlabel('nin_ratio')
+    plt.xlabel('min_ratio')
     plt.ylabel('loss')
     plt.legend()
     plt.show()

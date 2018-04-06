@@ -283,7 +283,7 @@ class ConvNet(object):
 
 
 def plot_result():
-    dframe = pd.read_csv('loss.csv', sep=',', header=0)
+    dframe = pd.read_csv('m1.csv', sep=',', header=0)
     
     tr_loss = np.array(dframe['train_loss'])
     test_loss = np.array(dframe['test_loss'])
@@ -296,7 +296,7 @@ def plot_result():
     plt.xlabel('epoch')
     plt.ylabel('loss')
     plt.legend()
-    
+    plt.show()
     tr_acc = np.array(dframe['train_acc'])
     test_acc = np.array(dframe['test_acc'])
     # plot Acc - epoch
@@ -308,6 +308,7 @@ def plot_result():
     plt.xlabel('epoch')
     plt.ylabel('loss')
     plt.legend()
+    plt.show()
     
     
     
@@ -315,8 +316,8 @@ if __name__ == '__main__':
     tf.reset_default_graph() 
     model1 = ConvNet(cnn_layer_num=1, dnn_layer_num=4)
     model1.build()
-    model1.train(n_epochs=50)
+    model1.train(n_epochs=1000)
     model1.write_process('m1.csv')
          
-    #plot_result()
+    plot_result()
     

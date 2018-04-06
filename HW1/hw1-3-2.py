@@ -292,8 +292,8 @@ class ConvNet(object):
 
 
 def plot_result():
-    loss_acc = np.genfromtxt('loss_acc_1.csv', delimiter=',')
-    x = np.genfromtxt('para_1.csv', delimiter=',')
+    loss_acc = np.genfromtxt('loss_acc.csv', delimiter=',')
+    x = np.genfromtxt('para.csv', delimiter=',')
     
     # plot Loss - epoch
     print("plot loss - n_parameters ...")
@@ -306,6 +306,7 @@ def plot_result():
     plt.xlabel('n_of_parameters')
     plt.ylabel('loss')
     plt.legend()
+    plt.show()
     
     tr_acc = loss_acc[:,0]
     test_acc = loss_acc[:,1]
@@ -320,11 +321,13 @@ def plot_result():
     plt.ylabel('acc')
     plt.ylim(0.97,1)
     plt.legend()
+    plt.show()
     
     
     
 if __name__ == '__main__':
-    for i in range(10):
+    
+    for i in range(2):
         tf.reset_default_graph() 
         model = ConvNet(cnn_layer_num=1, dnn_layer_num=4, dnn_unit=100*(i+1))
         model.build()
