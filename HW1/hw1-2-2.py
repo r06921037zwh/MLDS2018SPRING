@@ -247,6 +247,7 @@ def plot_loss_grad(filename):
     plt.xlabel('epoch')
     plt.ylabel('loss')
     plt.legend()
+    plt.show()
 
     fig1 = plt.figure()
     x = np.arange(len(grad_norm))
@@ -254,7 +255,8 @@ def plot_loss_grad(filename):
     plt.title('Grad_Norm(2 norm)')
     plt.xlabel('epoch')
     plt.ylabel('grad_norm')
-    plt.legend()                
+    plt.legend()
+    plt.show()
 
 def Visualize_weights(first_file, all_layer, n_run):
     first_weights = np.genfromtxt(first_file, delimiter=",")  
