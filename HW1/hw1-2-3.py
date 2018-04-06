@@ -220,6 +220,7 @@ def plot_loss_minRatio(filename):
     plt.xlabel('nin_ratio')
     plt.ylabel('loss')
     plt.legend()
+    plt.show()
    
 if __name__ == '__main__':
     for i in range(100):
