@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Mar 29 00:10:58 2018
-
 @author: zhewei
 """
 
 # -*- coding: utf-8 -*-
 """
 Created on Tue Mar 27 23:23:17 2018
-
 @author: zhewei
 """
 
@@ -127,10 +125,10 @@ class neural_network(object):
             for item in items:
                 tmp = item.eval().flatten()
                 layer_weight.append(list(tmp))
-                # only record first layer 
-            if i == 0:
+            # only record first layer 
+            if i == 1:
                 out_first = np.array(sum(layer_weight, [])) 
-        
+                
         out_all = np.array(sum(layer_weight, []))
         return  out_first, out_all
     
@@ -167,12 +165,11 @@ class neural_network(object):
                 writer.add_summary(summaries, global_step=epoch)  
                 self.tr_loss_rec.append(v_loss)
                 
-                # store layer_weights every 3 epochs
+                # store layer_weights every 50 epochs
                 if epoch % 50 ==0:
                     first_layer, all_layer = self.derive_layer()
                     self.first_layer_rec = np.vstack((self.first_layer_rec, first_layer))
                     self.layer_rec = np.vstack((self.layer_rec, all_layer))
-                    #print(self.layer_rec.shape)
                     
                 # print loss every 100 epochs
                 if epoch % 100 == 0:
@@ -183,16 +180,7 @@ class neural_network(object):
             y_pred = sess.run(self.y_predict, feed_dict={self.x: x_range})
             self.pred_rec.append(y_pred)
             self.pred_rec = list(np.array(self.pred_rec).flatten())
-        
-                   
-    def write_process(self, filename):
-        with open(filename, 'w') as fout:
-            writer = csv.writer(fout, delimiter=',', lineterminator='\n')
-            writer.writerow(["train_loss", "prediction"])
-            d = [self.tr_loss_rec, self.pred_rec]
-            for values in zip_longest(*d):
-                writer.writerow(values) 
-                
+                                           
     def write_weight(self, all_layer, filename):
         with open(filename, 'a') as fout:
             writer = csv.writer(fout, delimiter=',', lineterminator='\n')
@@ -237,45 +225,10 @@ def Visualize(first_file, all_layer, n_run):
     plt.title('ALL - layer')
     ax.legend()
     plt.show()                    
-        
-def plot_result(n_point):
-    dframe1 = pd.read_csv('model1.csv', sep=',', header=0)
-    dframe2 = pd.read_csv('model2.csv', sep=',', header=0)
-    dframe3 = pd.read_csv('model3.csv', sep=',', header=0)
     
-    # plot Accuracy - epoch
-    tr_loss_1 = np.array(dframe1['train_loss'])
-    tr_loss_2 = np.array(dframe2['train_loss'])
-    tr_loss_3 = np.array(dframe3['train_loss'])
-                 
-    fig1 = plt.figure()
-    x = np.arange(len(tr_loss_1))
-    plt.axes(yscale='log')
-    plt.plot(x, tr_loss_1, color='blue', label='1-layer DNN')
-    plt.plot(x, tr_loss_2, color='orange', label='3-layer DNN')
-    plt.plot(x, tr_loss_3, color='green', label='6-layer DNN')
-    plt.title('Loss')
-    plt.xlabel('epoch')
-    plt.ylabel('loss')
-    plt.legend()
-    
-    # plot Prediction
-    pred_1 = np.array(dframe1['prediction']).reshape(-1, 1)
-    pred_2 = np.array(dframe2['prediction']).reshape(-1, 1)
-    pred_3 = np.array(dframe3['prediction']).reshape(-1, 1)
-    
-    fig1 = plt.figure()
-    x, g_truth = curve(n_point)
-    plt.plot(x, g_truth, color='red', label='ground truth')
-    plt.plot(x, pred_1[:n_point], color='blue', label='1-hidden DNN')
-    plt.plot(x, pred_2[:n_point], color='orange', label='3-hidden DNN')
-    plt.plot(x, pred_3[:n_point], color='green', label='6-hidden DNN')
-    plt.title('Prediction')
-    plt.xlabel('x')
-    plt.ylabel('y')
-    plt.legend()    
 if __name__ == '__main__':
-    for _ in range(8):
+    for i in range(8):
+        print("Building Model {}".format(i + 1))
         tf.reset_default_graph() 
         model = neural_network(n_layer=6)
         model.build()
@@ -284,7 +237,3 @@ if __name__ == '__main__':
         model.write_weight(all_layer=True, filename='all_layer.csv')
     Visualize('1st_layer.csv', 'all_layer.csv', n_run=8)
     
-    #model.write_process(filename='model.csv')
-    #n_point = model.n_point
-    #plot_result(n_point)
-
