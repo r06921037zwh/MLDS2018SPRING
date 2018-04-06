@@ -308,6 +308,7 @@ def plot_result():
     plt.xlabel('epoch')
     plt.ylabel('acc')
     plt.legend()
+    plt.show()
     
     # plot Loss - epoch
     fig2 = plt.figure()
@@ -319,6 +320,7 @@ def plot_result():
     plt.xlabel('epoch')
     plt.ylabel('loss')
     plt.legend()
+    plt.show()
     
     
 if __name__ == '__main__':
