@@ -12,7 +12,7 @@ import json
 import re
 import tensorflow as tf
 from keras.preprocessing import sequence
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import time 
 import random
 import math 
