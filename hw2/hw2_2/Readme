@@ -1,1 +1,3 @@
+執行 ./hw2_seq2seq.sh --infile --outfile
 
+*train model: python3 model_train.py
