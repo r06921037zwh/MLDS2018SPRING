@@ -323,11 +323,11 @@ class Conditional_GAN(object):
             
     
     def show_img(self, sess, test_data_requirements, epoch, test_flag): # test_data_requirements [4,2]
-        if test_flag == True:
-            self.test_use_random_batch_z = np.random.normal(-0.4, 0.4, (25, self.random_noise_dim))
-            print('regenerate initial seeds')
-            np.save('./best_random_25s.npy', self.test_use_random_batch_z)
-        
+        #if test_flag == True:
+        #    self.test_use_random_batch_z = np.random.normal(-0.4, 0.4, (25, self.random_noise_dim))
+        #    print('regenerate initial seeds')
+        #np.save('./best_random_25s.npy', self.test_use_random_batch_z)
+        self.test_use_random_batch_z = np.load('./best_random_25s.npy')
         generated_imgs = sess.run(self.G_img, {self.z: self.test_use_random_batch_z, self.tag: self.testing_requirements}) # fix the random data
     
         size_figure_grid = 5
