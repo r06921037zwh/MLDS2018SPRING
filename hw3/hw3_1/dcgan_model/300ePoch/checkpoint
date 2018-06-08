@@ -1,0 +1,6 @@
+model_checkpoint_path: "dcgan.ckpt"
+all_model_checkpoint_paths: "..\\965ePoch\\dcgan.ckpt"
+all_model_checkpoint_paths: "..\\985ePoch\\dcgan.ckpt"
+all_model_checkpoint_paths: "..\\1005ePoch\\dcgan.ckpt"
+all_model_checkpoint_paths: "..\\1025ePoch\\dcgan.ckpt"
+all_model_checkpoint_paths: "dcgan.ckpt"
